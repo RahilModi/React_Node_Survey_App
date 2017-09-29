@@ -8,7 +8,7 @@ const app = express(); //start express app
 
 //
 app.get('/',(req,res) => {
-  res.send({hi: 'there'});
+  res.send({hi: 'Rahil'});
 });
 
 //handling dynamic port binding for deployment on heroku and development environment
