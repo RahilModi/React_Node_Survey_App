@@ -3,9 +3,27 @@
 //es2015 style import => mport xyz from xyz ,supported in React
 
 const express = require('express'); //imports express module
+const mongoose = require('mongoose');
+const cookieSession = require('cookie-session');
+const passport = require('passport');
+const keys = require('./config/key');
+require('./models/user');
 require('./services/passport');
+
 const authRoutes = require('./routes/authRoutes');
+
+mongoose.connect(keys.DATABASE_URL);
 const app = express(); //start express app
+
+app.use(
+  cookieSession({
+    maxAge: 30 * 24 * 60 * 60 * 1000,
+    keys: [keys.COOKIE_KEY]
+  })
+);
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 authRoutes(app); //require('./routes/authRoutes')(app) is same as import and execution
 
