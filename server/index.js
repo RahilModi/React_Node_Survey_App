@@ -9,9 +9,11 @@ const passport = require('passport');
 const keys = require('./config/key');
 const bodyParser = require('body-parser');
 require('./models/user');
+require('./models/survey');
 require('./services/passport');
 const authRoutes = require('./routes/authRoutes');
 const bilingRoutes = require('./routes/bilingRoutes');
+const survetRoutes = require('./routes/surveyRoutes');
 
 mongoose.connect(keys.DATABASE_URL);
 const app = express(); //start express app
@@ -29,6 +31,14 @@ app.use(passport.session());
 
 authRoutes(app); //require('./routes/authRoutes')(app) is same as import and execution
 bilingRoutes(app);
+
+if(process.env.NODE_ENV === 'production'){
+  app.use(express.static('client/build'));
+  const path = require('path');
+  app.get('*', (req,res)=>{
+    res.sendFile(path.resolve(__dirname,'client','build','index.html'));
+  });
+}
 
 //handling dynamic port binding for deployment on heroku and development environment
 const PORT = process.env.PORT || 5000;
