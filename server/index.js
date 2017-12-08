@@ -1,6 +1,6 @@
 'use strict';
 //commonJS import type => require('xyz') ,supported by Node
-//es2015 style import => mport xyz from xyz ,supported in React
+//es2015 style import => import xyz from xyz ,supported in React
 
 const express = require('express'); //imports express module
 const mongoose = require('mongoose');
@@ -14,6 +14,7 @@ require('./services/passport');
 const authRoutes = require('./routes/authRoutes');
 const bilingRoutes = require('./routes/bilingRoutes');
 const survetRoutes = require('./routes/surveyRoutes');
+
 
 mongoose.connect(keys.DATABASE_URL);
 const app = express(); //start express app
