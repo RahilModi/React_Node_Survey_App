@@ -13,7 +13,7 @@ require('./models/survey');
 require('./services/passport');
 const authRoutes = require('./routes/authRoutes');
 const bilingRoutes = require('./routes/bilingRoutes');
-const survetRoutes = require('./routes/surveyRoutes');
+const surveyRoutes = require('./routes/surveyRoutes');
 
 
 mongoose.connect(keys.DATABASE_URL);
@@ -32,6 +32,7 @@ app.use(passport.session());
 
 authRoutes(app); //require('./routes/authRoutes')(app) is same as import and execution
 bilingRoutes(app);
+surveyRoutes(app);
 
 if(process.env.NODE_ENV === 'production'){
   app.use(express.static('client/build'));
