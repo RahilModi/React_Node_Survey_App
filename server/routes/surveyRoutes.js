@@ -19,7 +19,7 @@ module.exports = app => {
     });
 
     app.post('/api/surveys/webhooks', (req, res) => {
-        const p = new Path('/api/surveys/:surveyId/:choice');
+        const p = new Path('api/surveys/:surveyId/:choice');
 
         const events = _.chain(req.body)
         .map(req.body, ({email, url}) => {
@@ -43,8 +43,6 @@ module.exports = app => {
             }).exec();
         })
         .value();
-
-        console.log(events);
 
         res.send({});
     });
